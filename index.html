@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KhetiMitra - AI Farmer Assistance Agent</title>
+  <meta name="description" content="A multi-agent AI system providing crop recommendations, pest and disease guidance, government schemes, and general advisor support to farmers.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== Landing Screen ===== -->
+  <div id="landing-screen" class="landing-container" role="main">
+    <div class="landing-glass-card">
+      <div class="landing-badge">🌾 Google Agents for Good</div>
+      <h1 class="landing-title">KhetiMitra</h1>
+      <h2 class="landing-subtitle">AI Farmer Assistance Agent</h2>
+      <p class="landing-desc">
+        👋 Welcome to KhetiMitra. Your AI-powered smart farming assistant helping farmers make better decisions. We orchestrate specialized agents to assist with crops, pests, government benefits, and sustainable organic farming.
+      </p>
+      
+      <!-- Hero Illustration -->
+      <div class="hero-illustration" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" fill="none" class="animated-svg">
+          <defs>
+            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#E2F0D9" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#FFF2CC" stop-opacity="0.1"/>
+            </linearGradient>
+            <linearGradient id="stemGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#1E4620"/>
+              <stop offset="100%" stop-color="#385723"/>
+            </linearGradient>
+            <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2E7D32"/>
+              <stop offset="100%" stop-color="#4CAF50"/>
+            </linearGradient>
+          </defs>
+          <!-- Background sky glow -->
+          <rect width="800" height="350" rx="24" fill="url(#skyGrad)"/>
+          <!-- Soil/Hills -->
+          <path d="M 0 350 Q 200 300 400 330 T 800 320 L 800 350 Z" fill="#4E3629" opacity="0.3"/>
+          <path d="M 0 350 Q 250 280 500 320 T 800 290 L 800 350 Z" fill="#3D2B1F"/>
+          <!-- Tech nodes connecting plant/drone/soil sensor -->
+          <line x1="150" y1="80" x2="400" y2="170" stroke="#4CAF50" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.5"/>
+          <line x1="650" y1="280" x2="400" y2="170" stroke="#4CAF50" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.5"/>
+          <!-- Crop Plant (Wheat representation) -->
+          <g class="crop-group" transform="translate(400, 290)">
+            <path d="M 0 60 Q -10 -40 0 -120" stroke="url(#stemGrad)" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M 0 -120 Q -40 -150 -80 -140 Q -40 -110 0 -120" fill="#2E7D32"/>
+            <path d="M 0 -120 Q 40 -150 80 -140 Q 40 -110 0 -120" fill="#2E7D32"/>
+            <path d="M -5 -40 Q -50 -60 -70 -30 Q -35 -20 -5 -40" fill="#2E7D32"/>
+            <path d="M 5 -70 Q 50 -90 70 -60 Q 35 -50 5 -70" fill="#2E7D32"/>
+            <circle cx="0" cy="-135" r="10" fill="url(#accentGrad)"/>
+            <circle cx="-12" cy="-150" r="7" fill="url(#accentGrad)"/>
+            <circle cx="12" cy="-150" r="7" fill="url(#accentGrad)"/>
+            <circle cx="0" cy="-165" r="6" fill="url(#accentGrad)"/>
+          </g>
+          <!-- Drone -->
+          <g transform="translate(150, 80)">
+            <rect x="-25" y="-6" width="50" height="12" rx="4" fill="#1B3B22"/>
+            <circle cx="-20" cy="-6" r="8" fill="#4CAF50" opacity="0.6"/>
+            <circle cx="20" cy="-6" r="8" fill="#4CAF50" opacity="0.6"/>
+            <circle cx="0" cy="0" r="10" fill="#1B3B22"/>
+            <text x="0" y="4" font-size="10" fill="white" font-weight="bold" text-anchor="middle">🚁</text>
+          </g>
+          <!-- Weather / Sun -->
+          <circle cx="680" cy="80" r="25" fill="#FFA726" class="pulse-node"/>
+          <!-- Cloud -->
+          <path d="M 620 90 A 15 15 0 0 1 650 90 A 20 20 0 0 1 680 100 A 15 15 0 0 1 640 110 L 620 110 Z" fill="white" opacity="0.8"/>
+          <!-- Farmer -->
+          <g transform="translate(240, 240)">
+            <circle cx="0" cy="-25" r="12" fill="#D4A373"/>
+            <path d="M -20 -28 Q 0 -45 20 -28 Z" fill="#FFA726"/>
+            <line x1="-25" y1="-28" x2="25" y2="-28" stroke="#FFA726" stroke-width="3"/>
+            <path d="M -15 0 L 15 0 L 10 35 L -10 35 Z" fill="#2E7D32"/>
+            <text x="0" y="20" font-size="12" fill="white" text-anchor="middle">🌾</text>
+          </g>
+          <!-- Soil Sensor -->
+          <g transform="translate(650, 280)">
+            <rect x="-6" y="-10" width="12" height="30" rx="3" fill="#3D2B1F"/>
+            <circle cx="0" cy="-15" r="10" fill="#4CAF50" class="pulse-node"/>
+            <text x="0" y="-11" font-size="8" fill="white" font-weight="bold" text-anchor="middle">📡</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="landing-actions">
+        <button id="start-chat-btn" class="primary-action-btn" aria-label="Start chatting with KhetiMitra">
+          Start Asking <span aria-hidden="true">➔</span>
+        </button>
+        <button class="secondary-action-btn" onclick="document.getElementById('start-chat-btn').click();" aria-label="Explore features of KhetiMitra">
+          Explore Features
+        </button>
+      </div>
+
+      <!-- Quick Feature Cards -->
+      <div class="feature-cards-grid" role="list" aria-label="Feature categories">
+        <div class="feature-card" role="listitem" tabindex="0" onclick="launchWithSuggestion('Which crop should I grow in clay soil during winter?')" onkeydown="if(event.key==='Enter'||event.key===' '){launchWithSuggestion('Which crop should I grow in clay soil during winter?')}" aria-label="Crop Recommendation - click to try">
+          <div class="feature-card-icon" aria-hidden="true">🌾</div>
+          <h3 class="feature-card-title">Crop Recommendation</h3>
+          <p class="feature-card-desc">Matches crop seeds to your soil type and seasons for maximum yields.</p>
+        </div>
+        <div class="feature-card" role="listitem" tabindex="0" onclick="launchWithSuggestion('Cotton leaves showing yellow spots and tiny whitefly insects.')" onkeydown="if(event.key==='Enter'||event.key===' '){launchWithSuggestion('Cotton leaves showing yellow spots and tiny whitefly insects.')}" aria-label="Pest & Disease Diagnosis - click to try">
+          <div class="feature-card-icon" aria-hidden="true">🐛</div>
+          <h3 class="feature-card-title">Pest &amp; Disease Diagnosis</h3>
+          <p class="feature-card-desc">Identify likely crop diseases from leaf patterns and get remedies.</p>
+        </div>
+        <div class="feature-card" role="listitem" tabindex="0" onclick="launchWithSuggestion('Tell me about PM-Kisan subsidy scheme details')" onkeydown="if(event.key==='Enter'||event.key===' '){launchWithSuggestion('Tell me about PM-Kisan subsidy scheme details')}" aria-label="Government Schemes - click to try">
+          <div class="feature-card-icon" aria-hidden="true">🏛</div>
+          <h3 class="feature-card-title">Government Schemes</h3>
+          <p class="feature-card-desc">Search for matching subsidies, agricultural loans, and crop insurances.</p>
+        </div>
+        <div class="feature-card" role="listitem" tabindex="0" onclick="launchWithSuggestion('How to make organic compost fertilizer?')" onkeydown="if(event.key==='Enter'||event.key===' '){launchWithSuggestion('How to make organic compost fertilizer?')}" aria-label="Organic Farming Advice - click to try">
+          <div class="feature-card-icon" aria-hidden="true">🌱</div>
+          <h3 class="feature-card-title">Organic Farming Advice</h3>
+          <p class="feature-card-desc">Low-cost sustainable techniques, composting advice, and rotation guides.</p>
+        </div>
+      </div>
+
+      <!-- Smart Statistics Section -->
+      <div class="stats-section" aria-label="Platform statistics">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" aria-label="120 plus supported crops">120+</div>
+            <div class="stat-label">Supported Crops</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" aria-label="350 plus pest knowledge base entries">350+</div>
+            <div class="stat-label">Pest Knowledge Base</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" aria-label="50 plus government schemes">50+</div>
+            <div class="stat-label">Government Schemes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" aria-label="95 percent average query success">95%</div>
+            <div class="stat-label">Avg Query Success</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Main Application Layout ===== -->
+  <div id="app-workspace" class="workspace-container hidden" role="application" aria-label="KhetiMitra AI assistant workspace">
+    <!-- Header bar -->
+    <header class="app-header">
+      <div class="header-left">
+        <!-- Sidebar Toggle -->
+        <button id="sidebar-toggle-btn" class="sidebar-toggle-btn" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="workspace-sidebar">
+          <span class="hamburger-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+        <div class="brand" onclick="window.location.reload();" role="button" tabindex="0" aria-label="KhetiMitra home - click to reload" onkeydown="if(event.key==='Enter')window.location.reload()">
+          <div class="brand-logo" aria-hidden="true">🌾</div>
+          <div class="brand-details">
+            <h1>KhetiMitra</h1>
+            <p>AI Farmer Assistance Agent &bull; Multi-Agent Orchestration</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- API Key Box -->
+      <div class="header-settings">
+        <label for="api-key-input" class="sr-only">Gemini API Key</label>
+        <div class="api-key-container">
+          <span class="key-icon" aria-hidden="true">🔑</span>
+          <input type="password" id="api-key-input" placeholder="Gemini API Key (Optional)..." title="Enter Gemini API key for live AI execution" autocomplete="off">
+        </div>
+      </div>
+    </header>
+
+    <!-- App Body Grid -->
+    <main class="workspace-grid" id="workspace-grid">
+      <!-- Left Column: Sidebar -->
+      <aside class="workspace-sidebar" id="workspace-sidebar" aria-label="Agent status and tools">
+        
+        <!-- Specialized Agent Monitor -->
+        <section class="sidebar-card active-agents-panel" aria-labelledby="agents-panel-title">
+          <h3 id="agents-panel-title">🤖 Specialized Agents</h3>
+          <div class="agent-compact-list" role="list">
+            
+            <div class="agent-compact-item active" id="agent-router" role="listitem" aria-label="Router Agent - Query Understanding">
+              <div class="agent-dot" aria-hidden="true"></div>
+              <div class="agent-icon-wrap" aria-hidden="true">🧭</div>
+              <div class="agent-meta-info">
+                <h4>Router Agent</h4>
+                <p>Query Understanding</p>
+              </div>
+            </div>
+
+            <div class="agent-compact-item" id="agent-crop" role="listitem" aria-label="Crop Advisor Agent - Recommendations">
+              <div class="agent-dot" aria-hidden="true"></div>
+              <div class="agent-icon-wrap" aria-hidden="true">🌾</div>
+              <div class="agent-meta-info">
+                <h4>Crop Advisor</h4>
+                <p>Recommendations</p>
+              </div>
+            </div>
+
+            <div class="agent-compact-item" id="agent-pest" role="listitem" aria-label="Pest Expert Agent - Disease Detection">
+              <div class="agent-dot" aria-hidden="true"></div>
+              <div class="agent-icon-wrap" aria-hidden="true">🐛</div>
+              <div class="agent-meta-info">
+                <h4>Pest Expert</h4>
+                <p>Disease Detection</p>
+              </div>
+            </div>
+
+            <div class="agent-compact-item" id="agent-scheme" role="listitem" aria-label="Scheme Advisor Agent - Government Benefits">
+              <div class="agent-dot" aria-hidden="true"></div>
+              <div class="agent-icon-wrap" aria-hidden="true">🏛</div>
+              <div class="agent-meta-info">
+                <h4>Scheme Advisor</h4>
+                <p>Government Benefits</p>
+              </div>
+            </div>
+
+            <div class="agent-compact-item" id="agent-general" role="listitem" aria-label="Organic Advisor Agent - Natural Farming">
+              <div class="agent-dot" aria-hidden="true"></div>
+              <div class="agent-icon-wrap" aria-hidden="true">🌱</div>
+              <div class="agent-meta-info">
+                <h4>Organic Advisor</h4>
+                <p>Natural Farming</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Weather Widget -->
+        <section class="weather-widget-card" aria-labelledby="weather-title">
+          <div class="weather-header">
+            <span class="weather-title" id="weather-title">☀️ Weather Station</span>
+            <div class="weather-temp-wrap" aria-label="Current temperature 31 degrees Celsius">
+              <span class="weather-temp">31</span>
+              <span class="weather-temp-unit">°C</span>
+            </div>
+          </div>
+          <div class="weather-grid" role="list" aria-label="Weather statistics">
+            <div class="weather-stat-item" role="listitem">
+              <span class="weather-stat-label">Humidity:</span>
+              <span class="weather-stat-val">68%</span>
+            </div>
+            <div class="weather-stat-item" role="listitem">
+              <span class="weather-stat-label">Rainfall:</span>
+              <span class="weather-stat-val">12mm</span>
+            </div>
+            <div class="weather-stat-item" role="listitem">
+              <span class="weather-stat-label">Wind Speed:</span>
+              <span class="weather-stat-val">14 km/h</span>
+            </div>
+            <div class="weather-stat-item" role="listitem">
+              <span class="weather-stat-label">Season:</span>
+              <span class="weather-stat-val">Monsoon</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Diagnostics/Tests -->
+        <section class="sidebar-card diagnostics-panel" aria-labelledby="diagnostics-title">
+          <h3 id="diagnostics-title">🔍 Agent Diagnostics</h3>
+          <p class="panel-subtitle">Evaluate the Router performance using the 20-Query test suite</p>
+          
+          <div class="diagnostics-status-grid" role="list" aria-label="Diagnostics status">
+            <div class="diagnostics-status-card" role="listitem">
+              <span class="diagnostics-status-label">System Status</span>
+              <span class="diagnostics-status-value"><span class="status-dot-green" aria-hidden="true"></span> Online</span>
+            </div>
+            <div class="diagnostics-status-card" role="listitem">
+              <span class="diagnostics-status-label">API Status</span>
+              <span class="diagnostics-status-value" id="diag-api-status">Standby</span>
+            </div>
+            <div class="diagnostics-status-card" role="listitem">
+              <span class="diagnostics-status-label">KB Records</span>
+              <span class="diagnostics-status-value">550+</span>
+            </div>
+            <div class="diagnostics-status-card" role="listitem">
+              <span class="diagnostics-status-label">Response Time</span>
+              <span class="diagnostics-status-value" id="diag-response-time">--</span>
+            </div>
+          </div>
+
+          <button id="run-diagnostics-btn" class="diagnostics-btn" aria-label="Run the agent router test suite">
+            ⚡ Run Test Suite
+          </button>
+          <div id="diagnostics-results" class="diagnostics-results-log" role="log" aria-live="polite" aria-label="Diagnostics results"></div>
+        </section>
+      </aside>
+
+      <!-- Center & Right Columns: Chat Area -->
+      <section class="workspace-main" aria-label="Chat and telemetry">
+        <!-- Telemetry Dashboard -->
+        <section class="telemetry-dashboard" aria-label="Agent telemetry dashboard">
+          <div class="telemetry-card" id="telemetry-agent-card">
+            <span class="telemetry-icon" aria-hidden="true">🧠</span>
+            <div class="telemetry-content">
+              <span class="telemetry-label">Active Agent</span>
+              <span id="telemetry-agent" class="telemetry-value" aria-live="polite">Router Agent</span>
+            </div>
+          </div>
+          <div class="telemetry-card" id="telemetry-crop-card">
+            <span class="telemetry-icon" aria-hidden="true">🌾</span>
+            <div class="telemetry-content">
+              <span class="telemetry-label">Detected Crop</span>
+              <span id="telemetry-crop" class="telemetry-value" aria-live="polite">None</span>
+            </div>
+          </div>
+          <div class="telemetry-card" id="telemetry-soil-card">
+            <span class="telemetry-icon" aria-hidden="true">🌱</span>
+            <div class="telemetry-content">
+              <span class="telemetry-label">Detected Soil</span>
+              <span id="telemetry-soil" class="telemetry-value" aria-live="polite">None</span>
+            </div>
+          </div>
+          <div class="telemetry-card" id="telemetry-season-card">
+            <span class="telemetry-icon" aria-hidden="true">☀️</span>
+            <div class="telemetry-content">
+              <span class="telemetry-label">Detected Season</span>
+              <span id="telemetry-season" class="telemetry-value" aria-live="polite">None</span>
+            </div>
+          </div>
+          <div class="telemetry-card" id="telemetry-confidence-card">
+            <span class="telemetry-icon" aria-hidden="true">🎯</span>
+            <div class="telemetry-content">
+              <span class="telemetry-label">Confidence</span>
+              <span id="telemetry-confidence" class="telemetry-value" aria-live="polite">--</span>
+              <div class="telemetry-confidence-bar-wrap" id="telemetry-confidence-bar-wrap" role="progressbar" aria-label="Confidence level" aria-valuemin="0" aria-valuemax="100">
+                <div class="telemetry-confidence-bar" id="telemetry-confidence-bar" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="telemetry-card" id="telemetry-status-card">
+            <span class="telemetry-icon" aria-hidden="true">⚡</span>
+            <div class="telemetry-content">
+              <span class="telemetry-label">Status</span>
+              <span id="telemetry-status" class="telemetry-value" aria-live="polite">Ready</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Live Pipeline Workflow Visualization Banner -->
+        <section class="agent-workflow-visualizer" aria-label="Agent pipeline status">
+          <div class="workflow-title-box">
+            <span class="workflow-live-badge"><span class="workflow-live-dot" aria-hidden="true"></span> Pipeline Status</span>
+          </div>
+          <div class="workflow-steps-wrap" role="list" aria-label="Processing pipeline steps">
+            <div class="workflow-step active" id="wf-step-1" role="listitem" aria-label="Step 1: Router">
+              <span class="workflow-step-num" aria-hidden="true">1</span>
+              <span class="workflow-step-label">Router</span>
+            </div>
+            <div class="workflow-arrow" aria-hidden="true">➜</div>
+            <div class="workflow-step" id="wf-step-2" role="listitem" aria-label="Step 2: Specialist">
+              <span class="workflow-step-num" aria-hidden="true">2</span>
+              <span class="workflow-step-label">Specialist</span>
+            </div>
+            <div class="workflow-arrow" aria-hidden="true">➜</div>
+            <div class="workflow-step" id="wf-step-3" role="listitem" aria-label="Step 3: Gemini LLM">
+              <span class="workflow-step-num" aria-hidden="true">3</span>
+              <span class="workflow-step-label">Gemini LLM</span>
+            </div>
+            <div class="workflow-arrow" aria-hidden="true">➜</div>
+            <div class="workflow-step" id="wf-step-4" role="listitem" aria-label="Step 4: Final Card">
+              <span class="workflow-step-num" aria-hidden="true">4</span>
+              <span class="workflow-step-label">Final Card</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chat Frame -->
+        <div class="chat-frame-card" role="main" aria-label="Chat with KhetiMitra">
+          <!-- Chat Window Messages -->
+          <div class="chat-messages-container" id="chat-box" role="log" aria-live="polite" aria-label="Chat messages">
+            
+            <!-- ===== Welcome Card (Empty State) ===== -->
+            <div id="welcome-card" class="welcome-card-wrap" aria-label="Welcome to KhetiMitra">
+              <div class="welcome-hero">
+                <div class="welcome-logo-badge" aria-hidden="true">🌾</div>
+                <h2 class="welcome-title">Welcome to KhetiMitra 🌾</h2>
+                <p class="welcome-subtitle">Your AI-powered farming assistant. Ask me anything about agriculture.</p>
+              </div>
+              
+              <div class="welcome-suggestions-grid" role="list" aria-label="Quick question suggestions">
+                <button class="welcome-suggestion-card" role="listitem" onclick="setSuggestion('Which crop is best for clay soil in winter?')" aria-label="Ask about crop recommendations">
+                  <span class="wsc-icon" aria-hidden="true">🌾</span>
+                  <span class="wsc-label">Crop Recommendation</span>
+                  <span class="wsc-example">Which crop for clay soil in winter?</span>
+                </button>
+                <button class="welcome-suggestion-card" role="listitem" onclick="setSuggestion('My cotton leaves have yellow spots and white insects.')" aria-label="Ask about pest management">
+                  <span class="wsc-icon" aria-hidden="true">🐛</span>
+                  <span class="wsc-label">Pest Management</span>
+                  <span class="wsc-example">Cotton leaves have white insects?</span>
+                </button>
+                <button class="welcome-suggestion-card" role="listitem" onclick="setSuggestion('What is the best way to save water using drip irrigation?')" aria-label="Ask about irrigation advice">
+                  <span class="wsc-icon" aria-hidden="true">💧</span>
+                  <span class="wsc-label">Irrigation Advice</span>
+                  <span class="wsc-example">How to save water with drip irrigation?</span>
+                </button>
+                <button class="welcome-suggestion-card" role="listitem" onclick="setSuggestion('What crops should I grow in monsoon season?')" aria-label="Ask about weather guidance">
+                  <span class="wsc-icon" aria-hidden="true">🌦</span>
+                  <span class="wsc-label">Weather Guidance</span>
+                  <span class="wsc-example">Best crops for monsoon season?</span>
+                </button>
+                <button class="welcome-suggestion-card" role="listitem" onclick="setSuggestion('How to make organic compost fertilizer at home?')" aria-label="Ask about fertilizer recommendations">
+                  <span class="wsc-icon" aria-hidden="true">🌱</span>
+                  <span class="wsc-label">Fertilizer Recommendation</span>
+                  <span class="wsc-example">How to make organic compost?</span>
+                </button>
+                <button class="welcome-suggestion-card" role="listitem" onclick="setSuggestion('Tell me about PM-Kisan subsidy scheme details')" aria-label="Ask about soil information">
+                  <span class="wsc-icon" aria-hidden="true">🏛</span>
+                  <span class="wsc-label">Government Schemes</span>
+                  <span class="wsc-example">PM-Kisan subsidy details?</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Area: Chips + Input -->
+          <div class="chat-footer-controls">
+            <!-- Suggestion Chips -->
+            <div class="suggestion-chips-row" role="list" aria-label="Quick suggestion chips">
+              <button class="chip-btn" role="listitem" onclick="setSuggestion('Which crop should I grow in clay soil during winter?')" aria-label="Ask about best crops for black soil">
+                🌾 Best crops for black soil
+              </button>
+              <button class="chip-btn" role="listitem" onclick="setSuggestion('How to make organic compost fertilizer?')" aria-label="Ask about organic compost">
+                🌱 Organic compost
+              </button>
+              <button class="chip-btn" role="listitem" onclick="setSuggestion('Cotton leaves showing yellow spots and tiny whitefly insects.')" aria-label="Ask about cotton diseases">
+                🐛 Cotton diseases
+              </button>
+              <button class="chip-btn" role="listitem" onclick="setSuggestion('Tell me about PM-Kisan subsidy scheme details')" aria-label="Ask about PM-KISAN">
+                🏛 PM-KISAN
+              </button>
+              <button class="chip-btn" role="listitem" onclick="setSuggestion('What should I grow in black soil during monsoon?')" aria-label="Ask about monsoon crops">
+                🌧 Monsoon crops
+              </button>
+              <button class="chip-btn" role="listitem" onclick="setSuggestion('Which seeds should I sow in sandy soil for winter?')" aria-label="Ask about sandy soil farming">
+                🌾 Sandy soil farming
+              </button>
+            </div>
+
+            <!-- Floating input container -->
+            <div class="floating-input-box">
+              <button class="mic-ui-btn" title="Microphone (UI Only)" aria-label="Microphone input (UI display only)">🎤</button>
+              <button class="attach-ui-btn" title="Attach Files (UI Only)" aria-label="Attachment input (UI display only)">📎</button>
+              <input type="text" id="user-input" class="chat-text-input" placeholder="Ask about crops, pests, irrigation, fertilizers, government schemes..." aria-label="Type your farming question here">
+              <div class="input-actions">
+                <button id="clear-input-btn" class="clear-ui-btn" title="Clear input" aria-label="Clear input text">✕</button>
+                <button id="send-btn" class="send-action-btn" aria-label="Send your farming query">
+                  <span>Send</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast notification container -->
+  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="app.js"></script>
+  <script>
+    // Global setSuggestion function (used by chips and welcome cards)
+    function setSuggestion(val) {
+      const input = document.getElementById('user-input');
+      if (input) {
+        input.value = val;
+        input.focus();
+      }
+    }
+
+    // Launch app and populate suggestion from landing page
+    function launchWithSuggestion(val) {
+      const startBtn = document.getElementById('start-chat-btn');
+      if (startBtn) startBtn.click();
+      setTimeout(() => setSuggestion(val), 100);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "khetimitra",
+  "version": "1.0.0",
+  "description": "AI Farmer Assistance Agent",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx -y http-server -p 8080"
+  }
+}
